@@ -18,12 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let dataStorePlugin = AWSDataStorePlugin(modelRegistration: AmplifyModels())
+        let apiPlugin = AWSAPIPlugin(modelRegistration: AmplifyModels())
+        
         do {
-           try Amplify.add(plugin:dataStorePlugin)
-           try Amplify.configure()
-           print("Initialized Amplify");
+            try Amplify.add(plugin: apiPlugin)
+            try Amplify.add(plugin:dataStorePlugin)
+            try Amplify.configure()
+            print("Initialized Amplify");
         } catch {
-           print("Could not initialize Amplify: \(error)")
+            print("Could not initialize Amplify: \(error)")
         }
         
         Amplify.Logging.logLevel = .info
